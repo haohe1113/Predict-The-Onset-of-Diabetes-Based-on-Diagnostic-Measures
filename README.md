@@ -1,5 +1,4 @@
-Read Data and Data Cleaning
-===========================
+## Read Data and Data Cleaning  
 
     ## Loading required package: Matrix
 
@@ -68,11 +67,9 @@ plot(age ~ class, data=diabetes, col=c(grey(.2),2:6), cex.lab=1)
 
 ![](FInal_Project_ver1.3_files/figure-markdown_github/fig1-1.png)
 
-Model Selection
-===============
+## Model Selection  
 
-KNN
----
+**KNN**  
 
 We are going to perform a 5-fold CV KNN model here. We are testing the K
 value for KNN ranging from 1 to 100. The optimal K is 17 which gives us
@@ -104,17 +101,15 @@ text(kk[best]+5,mAccuracy[best]-3,paste("Best Accuracy:",mAccuracy[best]), col=2
 maxAccuracy = max(mAccuracy)
 ```
 
-Tree Model
-----------
+**Tree Model**  
 
-We tried Simple Tree Model and Random Forest in this part.
+We tried Simple Tree Model and Random Forest in this part.  
 
-### Simple Tree
+**Simple Tree**  
 
 We grew the Simple Tree model based on one set up of train and test data
 following the grow-and-prune process. Because of the randomness of train
-and test data, **the accuracy rate of our Simple Tree model might
-floats**.
+and test data, **the accuracy rate of our Simple Tree model might floats**.
 
 ``` r
 library(tree)
@@ -211,8 +206,7 @@ cat("we have a pruned tree with accuracy rate of", accur_pruned,
 
     ## we have a pruned tree with accuracy rate of 0.7557252 with size of 3
 
-Random Forest
--------------
+**Random Forest**  
 
 We then built the Random Forest model based on a 10-fold CV where we
 tested the p value b/w 100 and 500 and the m value from 1 to 8 (total).
@@ -369,8 +363,7 @@ cat("we have a random forest model with accuracy rate of", accur_rf,
 
     ## we have a random forest model with accuracy rate of 0.7755102 with m = 4 p =  100
 
-Logistic Regression
--------------------
+**Logistic Regression**  
 
 In the end we performed a Logistic Regression with cross validation. The
 raw CV estimate of accuracy returned is **78.06%** and the **adjusted**
@@ -394,8 +387,7 @@ cv.error
 
     ## [1] 0.2278646 0.2255198
 
-Variable Selection
-==================
+## Variable Selection  
 
 As previously mentioned with the box plot, we notice some variables
 might have stronger predictive ability than others. Here,we will perform
@@ -411,14 +403,13 @@ tr = sample(1:n,
              replace = FALSE) 
 ```
 
-Out-of-Sample Stepwise Method
------------------------------
+### Out-of-Sample Stepwise Methods  
 
 We tried all three kinds of stepwise method: forward, backward and both.
 The results returned are the same with the model **class \~ plas + mass
 + age** and an accuracy of **76.27%**.
 
-### Forward Selection
+**Forward Selection**  
 
 ``` r
 test_x = DIAdata[-tr,][,-1]
@@ -521,7 +512,7 @@ forward_acc
 
     ## [1] 0.7651822
 
-### Backward Selection
+**Backward Selection**  
 
 ``` r
 regBack = step(full, 
@@ -578,7 +569,7 @@ back_acc
 
     ## [1] 0.7651822
 
-### Both Selection
+**Both Selection**  
 
 ``` r
 regHybrid = step(null, 
@@ -695,8 +686,7 @@ hybrid_acc
 
     ## [1] 0.7651822
 
-Out-of-Sample Shrinkage Method
-------------------------------
+### Out-of-Sample Shrinkage Method  
 
 Lasso returns with an accuracy of **77.11%** with the model
 **class\~plas+mass+age**.By looking at the coefficients, plas has a more
@@ -708,7 +698,7 @@ the stepwise method.
 Ridge, on the other hand, has a compromised performance with an accuracy
 of **72.88%** only.
 
-### Lasso
+**Lasso**  
 
 ``` r
 train_x = as.matrix(DIAdata[tr,-1])
@@ -762,7 +752,7 @@ lasso_acc
 
     ## [1] 0.7753036
 
-### Ridge
+**Ridge**    
 
 ``` r
 Ridge.Fit = glmnet(train_x,train_y,family = 'binomial',alpha=0)
@@ -818,8 +808,7 @@ ridg_acc
 
     ## [1] 0.7651822
 
-Model Comparison
-================
+## Model Comparison  
 
 Most of our models yield satisfactory accuracy of above 75%. We want to
 specifically compare the Logistic Regression Model with all variables
