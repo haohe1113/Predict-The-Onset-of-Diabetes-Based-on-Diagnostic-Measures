@@ -1,4 +1,4 @@
-Read Data and Data Cleaning
+## Read Data and Data Cleaning  
 ===========================
 
     ## Loading required package: Matrix
@@ -68,10 +68,10 @@ plot(age ~ class, data=diabetes, col=c(grey(.2),2:6), cex.lab=1)
 
 ![](FInal_Project_ver1.3_files/figure-markdown_github/fig1-1.png)
 
-Model Selection
+## Model Selection  
 ===============
 
-KNN
+**KNN**  
 ---
 
 We are going to perform a 5-fold CV KNN model here. We are testing the K
