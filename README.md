@@ -1,5 +1,5 @@
 # Diabetes Prediction Based on Diagnostic Measures  
-[intro](diabetes_intro.jpeg)  
+![intro](diabetes_intro.jpeg)  
 ## Read Data and Data Cleaning  
 
     ## Loading required package: Matrix
